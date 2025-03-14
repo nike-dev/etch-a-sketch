@@ -14,3 +14,9 @@ function createGrid(rows, columns) {
 
 createGrid(16, 16);
 
+container.addEventListener("mouseover", e => {
+    const targetClass = e.target.className;
+    if(targetClass === "square") {
+        e.target.style.backgroundColor = "black";
+    }
+})
