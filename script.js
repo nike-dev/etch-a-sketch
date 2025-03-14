@@ -22,10 +22,3 @@ container.addEventListener("mouseenter", e => {
     }
 }, true); // capture set to true as mouseenter event doesn't bubble for event delegation
 
-// listens for mouse leaving squares
-container.addEventListener("mouseleave", e => {
-    const targetClass = e.target.className;
-    if(targetClass === "square") {
-        e.target.style.backgroundColor = "white";
-    }
-}, true);
