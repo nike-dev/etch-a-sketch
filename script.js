@@ -14,9 +14,18 @@ function createGrid(rows, columns) {
 
 createGrid(16, 16);
 
-container.addEventListener("mouseover", e => {
+// listens for mouse entering squares
+container.addEventListener("mouseenter", e => {
     const targetClass = e.target.className;
     if(targetClass === "square") {
-        e.target.style.backgroundColor = "black";
+        e.target.style.backgroundColor = "yellow";
     }
-})
+}, true); // capture set to true as mouseenter event doesn't bubble for event delegation
+
+// listens for mouse leaving squares
+container.addEventListener("mouseleave", e => {
+    const targetClass = e.target.className;
+    if(targetClass === "square") {
+        e.target.style.backgroundColor = "white";
+    }
+}, true);
