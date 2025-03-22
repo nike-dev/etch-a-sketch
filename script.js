@@ -11,11 +11,10 @@ container.append(gridContainer);
 // creates a grid of squares 
 function createGrid(e) {
     const squaresPerSide = prompt("What size grid you want?");
-    if (gridContainer.hasChildNodes()) {
-        while (gridContainer.firstChild) {
-            gridContainer.removeChild(gridContainer.lastChild);
-        }
-    }
+    const gridSize = 300;
+    const squareSize = gridSize / squaresPerSide;
+
+    gridContainer.innerHTML = "";
     for (let j = 0; j < squaresPerSide; j++) {
 
         const rowDiv = document.createElement("div");
@@ -24,12 +23,24 @@ function createGrid(e) {
         for (let i = 0; i < squaresPerSide; i++) {
             const gridSquare = document.createElement("div");
             gridSquare.setAttribute("class", "square");
+            gridSquare.style.width = `${squareSize}px`;
+            gridSquare.style.height = `${squareSize}px`;
             rowDiv.append(gridSquare);
         }
     }
 }
 
+function removeGrid(e) {
+    if (gridContainer.hasChildNodes()) {
+        while (gridContainer.firstChild) {
+            gridContainer.removeChild(gridContainer.lastChild);
+        }
+    }
+}
+
+// promptBtn.addEventListener("click", removeGrid);
 promptBtn.addEventListener("click", createGrid);
+
 
 // listens for mouse entering squares
 container.addEventListener("mouseenter", e => {
