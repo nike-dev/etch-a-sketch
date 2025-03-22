@@ -8,34 +8,7 @@ promptBtn.textContent = "Start";
 container.append(promptBtn);
 container.append(gridContainer);
 
-// creates a grid of squares 
-function createGrid(e) {
-    let squaresPerSide = "";
-    while (isNaN(squaresPerSide)
-        || !squaresPerSide
-        || (squaresPerSide < 0)
-        || (squaresPerSide > 100)) {
-        squaresPerSide = parseInt(prompt("What size grid you want?"));
-    }
-    const gridSize = 600;
-    const squareSize = gridSize / squaresPerSide;
-
-    // gridContainer.innerHTML = "";  // removes all children by simply clearing HTML 
-    for (let j = 0; j < squaresPerSide; j++) {
-        const rowDiv = document.createElement("div");
-        rowDiv.setAttribute("class", "rowDiv");
-        gridContainer.append(rowDiv);
-        for (let i = 0; i < squaresPerSide; i++) {
-            const gridSquare = document.createElement("div");
-            gridSquare.setAttribute("class", "square");
-            gridSquare.style.width = `${squareSize}px`;
-            gridSquare.style.height = `${squareSize}px`;
-            rowDiv.append(gridSquare);
-        }
-    }
-}
-
-function removeGrid(e) {
+function removeGrid() {
     if (gridContainer.hasChildNodes()) {
         while (gridContainer.firstChild) {
             gridContainer.removeChild(gridContainer.lastChild);
@@ -43,8 +16,46 @@ function removeGrid(e) {
     }
 }
 
-promptBtn.addEventListener("click", removeGrid);
-promptBtn.addEventListener("click", createGrid);
+function createSquare(size) {
+    const square = document.createElement("div");
+    square.setAttribute("class", "square");
+    square.style.width = `${size}px`;
+    square.style.height = `${size}px`;
+    return square;
+}
+
+function createRow(squaresPerSide, squareSize) {
+    const row = document.createElement("div");
+    row.setAttribute("class", "rowDiv");
+    for (let i = 0; i < squaresPerSide; i++) {
+        row.append(createSquare(squareSize));
+    }
+    return row;
+}
+
+// creates a grid of squares 
+function createGrid(squaresPerSide) {
+    const gridSize = 600;
+    const squareSize = gridSize / squaresPerSide;
+
+    removeGrid();
+    for (let j = 0; j < squaresPerSide; j++) {
+        gridContainer.append(createRow(squaresPerSide, squareSize));
+    }
+}
+
+
+promptBtn.addEventListener("click", e => {
+    const squaresPerSide = parseInt(prompt("What size grid you want?"));
+    while (isNaN(squaresPerSide)
+        || (squaresPerSide < 0)
+        || (squaresPerSide > 100)) {
+        alert("Enter a valid number between 0 to 100.");
+        return;
+    }
+    createGrid(squaresPerSide);
+
+});
 
 
 // listens for mouse entering squares
