@@ -10,13 +10,18 @@ container.append(gridContainer);
 
 // creates a grid of squares 
 function createGrid(e) {
-    const squaresPerSide = prompt("What size grid you want?");
-    const gridSize = 300;
+    let squaresPerSide = "";
+    while (isNaN(squaresPerSide)
+        || !squaresPerSide
+        || (squaresPerSide < 0)
+        || (squaresPerSide > 100)) {
+        squaresPerSide = parseInt(prompt("What size grid you want?"));
+    }
+    const gridSize = 600;
     const squareSize = gridSize / squaresPerSide;
 
-    gridContainer.innerHTML = "";
+    // gridContainer.innerHTML = "";  // removes all children by simply clearing HTML 
     for (let j = 0; j < squaresPerSide; j++) {
-
         const rowDiv = document.createElement("div");
         rowDiv.setAttribute("class", "rowDiv");
         gridContainer.append(rowDiv);
@@ -38,7 +43,7 @@ function removeGrid(e) {
     }
 }
 
-// promptBtn.addEventListener("click", removeGrid);
+promptBtn.addEventListener("click", removeGrid);
 promptBtn.addEventListener("click", createGrid);
 
 
