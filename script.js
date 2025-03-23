@@ -21,7 +21,7 @@ function createSquare(size) {
     square.setAttribute("class", "square");
     square.style.width = `${size}px`;
     square.style.height = `${size}px`;
-    square.style.background.opacity = 0.1;
+    square.style.opacity = 0;
     return square;
 }
 
@@ -46,19 +46,12 @@ function createGrid(squaresPerSide) {
 }
 
 function generateRandomColor() {
-    let red;
-    let green;
-    let blue;
-    const arrRGB = [red, green, blue];
-
-    const newarrRGB = arrRGB.map(value => {
-        value = Math.floor(Math.random() * 10) * 28;
-        return value;
-    }
-    )
-    const RGB = `rgb(${newarrRGB[0]}, ${newarrRGB[1]}, ${newarrRGB[2]})`;
-    return RGB;
+    const red = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    return `rgb(${red}, ${blue}, ${green})`;
 }
+
 
 promptBtn.addEventListener("click", e => {
     const squaresPerSide = parseInt(prompt("What size grid you want?"));
@@ -79,7 +72,6 @@ container.addEventListener("mouseenter", e => {
     const targetClass = e.target.className;
     if (targetClass === "square") {
         e.target.style.backgroundColor = generateRandomColor();
-        console.log(e.target.style.opacity);
         if (e.target.style.opacity < 1) {
             e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
         }
