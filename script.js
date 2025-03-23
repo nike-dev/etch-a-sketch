@@ -21,6 +21,7 @@ function createSquare(size) {
     square.setAttribute("class", "square");
     square.style.width = `${size}px`;
     square.style.height = `${size}px`;
+    square.style.background.opacity = 0.1;
     return square;
 }
 
@@ -59,8 +60,6 @@ function generateRandomColor() {
     return RGB;
 }
 
-
-generateRandomColor();
 promptBtn.addEventListener("click", e => {
     const squaresPerSide = parseInt(prompt("What size grid you want?"));
     while (isNaN(squaresPerSide)
@@ -80,6 +79,12 @@ container.addEventListener("mouseenter", e => {
     const targetClass = e.target.className;
     if (targetClass === "square") {
         e.target.style.backgroundColor = generateRandomColor();
+        console.log(e.target.style.opacity);
+        if (e.target.style.opacity < 1) {
+            e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
+        }
+
+
     }
 }, true); // capture set to true as mouseenter event doesn't bubble for event delegation
 
