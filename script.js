@@ -69,13 +69,14 @@ promptBtn.addEventListener("click", e => {
 
 // listens for mouse entering squares
 container.addEventListener("mouseenter", e => {
-    const targetClass = e.target.className;
-    if (targetClass === "square") {
+    const targetClass = e.target.classList;  // returns a DOMtokenlist seperated by space
+    if (targetClass.contains("square")) {
         e.target.style.backgroundColor = generateRandomColor();
         if (e.target.style.opacity < 1) {
             e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
         }
 
+        console.log(e.target.classList);
 
     }
 }, true); // capture set to true as mouseenter event doesn't bubble for event delegation
